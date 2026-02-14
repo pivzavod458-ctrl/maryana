@@ -6,7 +6,7 @@
     <title>Для Марьяны ❤️</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        /* ОБЩИЙ СТИЛЬ "КРИНЖ-ОТКРЫТКА" */
+        /* ОБЩИЙ СТИЛЬ */
         body {
             background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
             font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
@@ -33,139 +33,103 @@
             position: absolute;
             top: 0;
             left: 0;
-            padding: 20px;
+            padding: 10px;
             box-sizing: border-box;
         }
 
         .active { display: flex; }
 
-        h1, h2 { text-shadow: 2px 2px 0px #fff; margin: 10px; }
-        p { font-size: 18px; font-weight: bold; }
+        h1, h2 { text-shadow: 2px 2px 0px #fff; margin: 5px; }
+        p { font-size: 16px; font-weight: bold; margin: 5px; }
 
-        /* КНОПКИ И ПОЛЯ */
+        /* КНОПКИ */
         .btn {
             background: linear-gradient(to bottom, #ff00cc, #333399);
-            border: 5px solid #fff;
-            border-radius: 20px;
+            border: 4px solid #fff;
+            border-radius: 15px;
             color: yellow;
-            padding: 15px 30px;
-            font-size: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            margin-top: 15px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+            margin-top: 10px;
             text-transform: uppercase;
             font-family: 'Comic Sans MS', sans-serif;
         }
-        
         .btn:active { transform: scale(0.95); }
-
-        input, textarea {
-            width: 90%;
-            padding: 15px;
-            border: 5px dashed red;
-            background: #fff0f5;
-            font-size: 18px;
-            font-family: 'Comic Sans MS', sans-serif;
-            border-radius: 15px;
-            margin: 10px 0;
-        }
 
         /* ИГРА */
         .game-wrapper {
             position: relative;
             width: 95%;
-            height: 60%;
+            height: 50%; /* Чуть меньше, чтобы влезла кнопка */
             border: 8px ridge gold;
             overflow: hidden;
             border-radius: 10px;
+            margin-bottom: 10px;
         }
 
         .game-area {
             width: 100%;
             height: 100%;
             background-color: #7a5c5c;
-            /* Ковер */
             background-image: repeating-linear-gradient(45deg, #7a5c5c 25%, transparent 25%, transparent 75%, #7a5c5c 75%, #7a5c5c), repeating-linear-gradient(45deg, #7a5c5c 25%, #5e3b3b 25%, #5e3b3b 75%, #7a5c5c 75%, #7a5c5c);
             background-position: 0 0, 10px 10px;
             background-size: 20px 20px;
             position: relative;
-            cursor: crosshair;
         }
 
         .fighter {
             position: absolute;
-            font-size: 40px; /* Персонажи поменьше */
-            transition: all 0.3s linear; /* Плавное движение */
-            width: 40px;
-            height: 40px;
+            font-size: 45px;
+            transition: top 0.3s linear, left 0.3s linear;
+            width: 50px;
+            height: 50px;
             text-align: center;
-            line-height: 40px;
+            line-height: 50px;
             z-index: 10;
         }
 
-        .hp-bar-container {
-            position: absolute;
-            top: 5px;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 10px;
-            box-sizing: border-box;
-            z-index: 20;
-        }
-
-        .hp-bar {
-            width: 100px;
-            height: 15px;
+        /* Кнопка атаки */
+        #attack-btn {
             background: red;
-            border: 2px solid white;
+            color: white;
+            width: 90%;
+            padding: 20px;
+            font-size: 24px;
+            border: 5px solid darkred;
+            animation: pulse 1s infinite;
         }
+        @keyframes pulse { 0% {transform: scale(1);} 50% {transform: scale(1.02);} 100% {transform: scale(1);} }
 
+        /* Остальные стили те же */
+        .hp-bar-container {
+            position: absolute; top: 5px; width: 100%; display: flex; justify-content: space-between; padding: 0 10px; box-sizing: border-box; z-index: 20;
+        }
+        .hp-bar { width: 100px; height: 15px; background: red; border: 2px solid white; transition: width 0.2s; }
+        
         #countdown {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 100px;
-            color: yellow;
-            text-shadow: 5px 5px 0 red;
-            z-index: 100;
-            display: none;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 80px; color: yellow; text-shadow: 4px 4px 0 red; z-index: 100; display: none;
         }
 
         /* СКАНЕР */
-        #video-container {
-            width: 250px;
-            height: 250px;
-            border: 10px groove gold;
-            border-radius: 50%;
-            overflow: hidden;
-            position: relative;
-            background: black;
-        }
+        #video-container { width: 200px; height: 200px; border: 8px groove gold; border-radius: 50%; overflow: hidden; position: relative; background: black; margin: 10px auto; }
         video { width: 100%; height: 100%; object-fit: cover; }
-        .scan-line {
-            position: absolute;
-            width: 100%; height: 5px; background: lime;
-            animation: scan 1.5s infinite linear;
-        }
+        .scan-line { position: absolute; width: 100%; height: 5px; background: lime; animation: scan 1.5s infinite linear; }
         @keyframes scan { 0%{top:0} 100%{top:100%} }
 
-        /* ВАРИАНТЫ ОТВЕТА */
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            width: 100%;
-        }
+        /* ВОПРОСЫ */
+        input, textarea { width: 85%; padding: 10px; border: 4px dashed red; background: #fff0f5; font-size: 16px; border-radius: 10px; margin: 5px 0; font-family: inherit; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; }
     </style>
 </head>
 <body>
 
     <div id="screen1" class="screen active">
         <h1>ЗДРАВСТВУЙТЕ!!!</h1>
-        <img src="https://media1.tenor.com/m/KWA2wQk9X7QAAAAC/rose-flower.gif" style="width: 150px; border-radius: 50%; border: 5px dotted gold;">
+        <img src="https://media1.tenor.com/m/KWA2wQk9X7QAAAAC/rose-flower.gif" style="width: 120px; border-radius: 50%; border: 4px dotted gold;">
         <h2>ВЫ МАРЬЯНА???</h2>
         <button class="btn" onclick="startScan()">ДА, ЭТО Я!</button>
     </div>
@@ -177,31 +141,34 @@
             <video id="camera" autoplay playsinline muted></video>
             <div class="scan-line"></div>
         </div>
-        <div id="scan-status" style="font-size: 24px; color: blue; background: #fff; padding: 5px;">0%</div>
-        <button id="skip-scan" style="display:none; font-size:10px; margin-top:20px;" onclick="finishScan()">пропустить (если глючит)</button>
+        <div id="scan-status" style="font-size: 20px; color: blue; background: #fff; padding: 5px;">0%</div>
+        <button id="skip-scan" style="display:none; font-size:10px; margin-top:20px;" onclick="finishScan()">пропустить</button>
     </div>
 
     <div id="screen3" class="screen">
-        <h2>ИГРА: ДАЙ ЛЮЛЕЙ САШЕ</h2>
-        <p style="font-size: 14px;">Тыкай по ковру, чтобы бежать. <br> Догони Сашу и тыкни В НЕГО!</p>
+        <h2>ДАЙ ЛЮЛЕЙ САШЕ</h2>
+        <p style="font-size: 12px;">1. Тыкни по ковру чтобы подойти<br>2. Жми красную кнопку!</p>
+        
         <div class="game-wrapper">
             <div class="hp-bar-container">
                 <div>ТЫ: <div id="p-hp" class="hp-bar"></div></div>
                 <div>САША: <div id="b-hp" class="hp-bar"></div></div>
             </div>
             <div class="game-area" id="game-area" onclick="movePlayer(event)">
-                <div id="player" class="fighter">💃</div>
-                <div id="bot" class="fighter" onclick="hitBot(event)">🏃‍♂️</div>
+                <div id="player" class="fighter" style="left:20px; top:50px;">💃</div>
+                <div id="bot" class="fighter" style="right:20px; top:50px;">🏃‍♂️</div>
                 <div id="countdown">3</div>
             </div>
         </div>
+
+        <button id="attack-btn" class="btn" onclick="tryAttack()">👊 ДАТЬ ЛЮЛЕЙ 👊</button>
     </div>
 
     <div id="screen4" class="screen">
         <h2>ВОПРОС 1</h2>
         <p>Насколько сильно ты любишь Сашу?</p>
-        <p style="font-size: 12px;">(Нужно написать много, минимум 50 букв!)</p>
-        <textarea id="love-text" rows="5" oninput="checkLoveText()"></textarea>
+        <p style="font-size: 11px;">(Минимум 50 символов!)</p>
+        <textarea id="love-text" rows="4" oninput="checkLoveText()"></textarea>
         <div id="char-count">0 / 50</div>
         <button id="btn-q1" class="btn" style="opacity: 0.5; pointer-events: none;" onclick="nextScreen('screen5')">ОТВЕТИТЬ</button>
     </div>
@@ -220,14 +187,14 @@
             <button class="btn" onclick="nextScreen('screen7')">МАРЬЯНУ</button>
             <button class="btn" onclick="nextScreen('screen7')">МАРЬЯНУ</button>
             <button class="btn" onclick="nextScreen('screen7')">МАРЬЯНУ</button>
-            <button class="btn" onclick="alert('НЕПРАВИЛЬНО! ТЫ ЧЕГО!!!')">ДЕНЬГИ</button>
+            <button class="btn" onclick="alert('НЕПРАВИЛЬНО! МЕРКАНТИЛЬНАЯ!')">ДЕНЬГИ</button>
         </div>
     </div>
 
     <div id="screen7" class="screen">
-        <h1 style="color: red; font-size: 40px;">ВНИМАНИЕ ЗАДАНИЕ!</h1>
+        <h1 style="color: red; font-size: 30px;">ВНИМАНИЕ ЗАДАНИЕ!</h1>
         <p>ПОКАЖИ СИСЬКУ В КАМЕРУ!</p>
-        <p>У тебя 5 секунд, иначе проиграешь!</p>
+        <p>У тебя 5 секунд!</p>
         <div id="boob-timer" style="font-size: 80px; font-weight: bold;">5</div>
     </div>
 
@@ -248,7 +215,7 @@
             document.getElementById(id).classList.add('active');
         }
 
-        // --- СКАНЕР (старая логика) ---
+        // --- СКАНЕР ---
         let scanProgress = 0;
         let video = document.getElementById('camera');
         
@@ -279,8 +246,7 @@
             initGame();
         }
 
-        // --- СЛОЖНАЯ ИГРА ---
-        let pHealth = 10;
+        // --- ИГРА (ИСПРАВЛЕННАЯ) ---
         let bHealth = 10;
         let gameActive = false;
         let gameArea = document.getElementById('game-area');
@@ -305,83 +271,83 @@
 
         function startGameLoop() {
             gameActive = true;
-            botRunLoop(); // Бот начинает бегать
+            botRunLoop();
         }
 
-        // Движение игрока (куда тыкнула)
         function movePlayer(e) {
             if(!gameActive) return;
-            // Координаты клика внутри поля
             let rect = gameArea.getBoundingClientRect();
-            let x = e.clientX - rect.left - 20; // -20 это половина ширины перса
-            let y = e.clientY - rect.top - 20;
-            
+            // Центрируем клик
+            let x = e.clientX - rect.left - 25; 
+            let y = e.clientY - rect.top - 25;
             player.style.left = x + 'px';
             player.style.top = y + 'px';
         }
 
-        // Бот убегает
         function botRunLoop() {
             if(!gameActive) return;
-            // Бот меняет позицию каждые 600мс (довольно быстро)
             let rect = gameArea.getBoundingClientRect();
-            let randX = Math.random() * (rect.width - 50);
-            let randY = Math.random() * (rect.height - 50);
+            let randX = Math.random() * (rect.width - 60);
+            let randY = Math.random() * (rect.height - 60);
             
             bot.style.left = randX + 'px';
             bot.style.top = randY + 'px';
 
-            setTimeout(botRunLoop, 600);
+            // САША ТЕПЕРЬ МЕДЛЕННЫЙ (1200мс = 1.2 секунды)
+            setTimeout(botRunLoop, 1200);
         }
 
-        // Удар по боту
-        function hitBot(e) {
-            e.stopPropagation(); // Чтобы не засчитывалось как движение
+        // НОВАЯ ФУНКЦИЯ УДАРА КНОПКОЙ
+        function tryAttack() {
             if(!gameActive) return;
 
-            // Проверяем расстояние (нужно быть близко)
             let pRect = player.getBoundingClientRect();
             let bRect = bot.getBoundingClientRect();
+            // Расчет расстояния
             let dist = Math.hypot(pRect.x - bRect.x, pRect.y - bRect.y);
 
-            if(dist < 80) { // Если достаточно близко
+            // 120 пикселей - нормальная дистанция
+            if(dist < 120) {
                 bHealth--;
                 updateHP();
                 bot.innerText = "😵";
-                setTimeout(() => bot.innerText = "🏃‍♂️", 300);
                 
-                // Бот сразу телепортируется после удара
-                let rect = gameArea.getBoundingClientRect();
-                bot.style.left = Math.random() * (rect.width - 50) + 'px';
-                bot.style.top = Math.random() * (rect.height - 50) + 'px';
+                // Эффект тряски экрана
+                document.body.style.transform = "translate(5px, 5px)";
+                setTimeout(() => document.body.style.transform = "none", 100);
+                setTimeout(() => bot.innerText = "🏃‍♂️", 500);
 
                 if(bHealth <= 0) winGame();
             } else {
-               // Слишком далеко
-               alert("Сначала догони!");
+                // Если далеко
+                let btn = document.getElementById('attack-btn');
+                let oldText = btn.innerText;
+                btn.innerText = "ПОДОЙДИ БЛИЖЕ!!!";
+                btn.style.background = "gray";
+                setTimeout(() => {
+                    btn.innerText = oldText;
+                    btn.style.background = "red";
+                }, 800);
             }
         }
 
         function updateHP() {
             document.getElementById('b-hp').style.width = (bHealth * 10) + 'px';
-            // Сашу бить нельзя (в плане он не бьет в ответ, просто убегает)
         }
 
         function winGame() {
             gameActive = false;
-            alert("ТЫ ПОБЕДИЛА САШУ!");
+            alert("САША ПОВЕРЖЕН!");
             nextScreen('screen4');
         }
 
-        // --- ВОПРОС 1 (50 символов) ---
+        // --- ЛОГИКА ВОПРОСОВ ---
         function checkLoveText() {
             let text = document.getElementById('love-text').value;
             let count = text.length;
             let countEl = document.getElementById('char-count');
             let btn = document.getElementById('btn-q1');
-
             countEl.innerText = count + " / 50";
-            
             if(count >= 50) {
                 countEl.style.color = "green";
                 btn.style.opacity = "1";
@@ -393,24 +359,17 @@
             }
         }
 
-        // --- ВОПРОС 2 (Донер) ---
         function checkFood() {
             let val = document.getElementById('food-input').value.trim().toLowerCase();
-            if(val === "донер" || val === "шаурма") { // На всякий случай шаурму тоже добавил
-                nextScreen('screen6');
-            } else {
-                alert("Неа! Подсказка: это вкусно и в лаваше.");
-            }
+            if(val === "донер" || val === "шаурма") nextScreen('screen6');
+            else alert("Неа! Это в лаваше...");
         }
 
-        // --- ФИНАЛ (Таймер) ---
-        // Запускается при переходе на 7 экран
+        // --- ФИНАЛ ---
         const originalNextScreen = nextScreen;
         nextScreen = function(id) {
             originalNextScreen(id);
-            if(id === 'screen7') {
-                startFinalTimer();
-            }
+            if(id === 'screen7') startFinalTimer();
         }
 
         function startFinalTimer() {
@@ -421,11 +380,10 @@
                 el.innerText = t;
                 if(t <= 0) {
                     clearInterval(interval);
-                    nextScreen('screen8'); // Победа
+                    nextScreen('screen8');
                 }
             }, 1000);
         }
-
     </script>
 </body>
 </html>
